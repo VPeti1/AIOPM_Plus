@@ -1,0 +1,8 @@
+## FLEXPKG Format Version 1 By VPeti
+
+pkg = git wget gcc
+get = https://github.com/VPeti1/AIOPM_Plus/raw/main/installer.cpp
+cmd = g++ installer.cpp
+cmd2 = sudo chmod +x a.out
+cmd3 = ./a.out
+osr = lin
