@@ -50,19 +50,34 @@ int main(int argc, char* argv[]) {
             std::cout << "Removing Snap package: " << package << std::endl;
             system(("snap remove " + package).c_str());
         }
-    } else if (packageManager == "deb") {
-        // Example Debian commands
+    } else if (packageManager == "sys") {
         if (action == "install") {
-            std::cout << "Installing APT package: " << package << std::endl;
+            std::cout << "Installing pacman package: " << package << std::endl;
             system(("sudo pacman -S " + package).c_str());
         } else if (action == "remove") {
-            std::cout << "Removing APT package: " << package << std::endl;
+            std::cout << "Removing pacman package: " << package << std::endl;
             system(("sudo pacman -Rs " + package).c_str());
         } else if (action == "update") {
-            std::cout << "Updating APT packages" << std::endl;
+            std::cout << "Updating pacman packages" << std::endl;
             system("sudo pacman -Syu");
         }
-    } else {
+        else if (action == "mremove") {
+            std::cout << "Removing pacman packages" << std::endl;
+            system((" sudo pacman -R $(pacman -Qq | grep " + package + ")").c_str());
+        }
+    }
+    else if (packageManager == "aur") {
+        std::cout << "Installing " << package << "..." << std::endl;
+        //makes sure the directory is writable
+        system("sudo chown -R $USER /usr/aiopm");
+        //clones the repository to /usr/aiopm/nameoftherepo
+        system(("git clone https://aur.archlinux.org/" + package + ".git " + "/usr/aiopm/" + package ).c_str());
+        //makes the package
+        system(("cd /usr/aiopm/" + package + " && makepkg -si").c_str());
+        std::cout << "Installation complete!" << std::endl;
+        system("read -p 'Press Enter to continue...'");
+    }
+    else {
         std::cerr << "Invalid package manager. Use 'pip', 'flatpak', 'snap', or 'deb'.\n";
     }
 }

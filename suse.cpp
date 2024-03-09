@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
             std::cout << "Removing Snap package: " << package << std::endl;
             system(("snap remove " + package).c_str());
         }
-    } else if (packageManager == "fed") {
+    } else if (packageManager == "sys") {
         // Example Fedora commands
         if (action == "install") {
             std::cout << "Installing zypper package: " << package << std::endl;

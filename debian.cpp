@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
             std::cout << "Removing Snap package: " << package << std::endl;
             system(("snap remove " + package).c_str());
         }
-    } else if (packageManager == "deb") {
+    } else if (packageManager == "sys") {
         // Example Debian commands
         if (action == "install") {
             std::cout << "Installing APT package: " << package << std::endl;
