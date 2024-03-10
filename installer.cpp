@@ -36,6 +36,7 @@ void dw() {
     }
      else {
         std::cout << "Unsupported distribution. Please choose arch, debian, void, suse or fedora." << std::endl;
+        system("exit");
     }
 }
 
