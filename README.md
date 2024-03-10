@@ -11,14 +11,14 @@ sudo chmod +x installer.out
 
 # Syntax
 ## pm <sys,snap,flatpak,pip> <install,remove,update> <package name>
-## Sys: default package manager of the system
+## Sys: default package manager of the system (When updating put a "*" after the update command)
 ## Snap: snap package manager (NO UPDATE)
 ## Flatpak: flatpak package manager 
 ## Pip: python package manager
 
 # Syntax for arch
 ## pm <sys,snap,flatpak,pip,mremove,aur> <install,remove,update> <package name>
-## Sys: default package manager of the system
+## Sys: default package manager of the system (When updating put a "*" after the update command)
 ## Snap: snap package manager (NO UPDATE)
 ## Flatpak: flatpak package manager 
 ## Pip: python package manager
