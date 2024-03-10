@@ -18,18 +18,10 @@ There is no update funtions when using snap
 ## Pip: python package manager
 ## Flex: installs flex.pkg files from the repo "FlexPackages"
 Extra argument: init (Installs and initializes FlexPkg)
-
-# Syntax for arch
-## pm <sys,snap,flatpak,pip,mremove,aur> <install,remove,update> <package name>
-## Sys: default package manager of the system 
-## Snap: snap package manager
-There is no update funtions when using snap
-## Flatpak: flatpak package manager 
-## Pip: python package manager
 ## MRemove: used to remove multiple packages in archlinux 
+Arch only
 ## AUR: arch linux user repo
-## Flex: installs flex.pkg files from the repo "FlexPackages"
-
+Arch only
 
 # Known issues
 ## Error: std::logic_error --- You havent entered all the arguments
