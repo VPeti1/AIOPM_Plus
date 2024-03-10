@@ -28,3 +28,10 @@ There is no update funtions when using snap
 ## Pip: python package manager
 ## MRemove: used to remove multiple packages in archlinux 
 ## AUR: arch linux user repo
+
+
+# Known issues
+## Error: std::logic_error --- You havent entered all the arguments
+terminate called after throwing an instance of 'std::logic_error'
+  what():  basic_string: construction from null is not valid
+Aborted (core dumped)
