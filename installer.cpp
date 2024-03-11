@@ -10,45 +10,55 @@
 using namespace std;
 
 
+
+
 void dw() {
-    std::string distro;
-    std::cout << "Enter your Linux distribution (arch/debian/fedora/suse/void): ";
-    std::cin >> distro;
-    if (distro == "arch") {
-        system("sudo pacman -S git wget gcc");
-        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/arch.cpp -O /usr/aiopmi/pm.cpp");
+    std::string input;
+    std::cout << "What distro are you using?" << std::endl;
+    std::cout << "(arch,debian,fedora,opensuse or void)" << std::endl;
+    std::cout << "(Derivatives included)" << std::endl;
+    //derivatives like ubuntu,mint...
+    std::cin >> input;
+    if (input == "arch" || input == "Arch") {
+        std::cout << "Setting configuration for Arch" << std::endl;
+        system("sudo touch /usr/aiopm/a1.cw");
     }
-    else if (distro == "debian") {
-        system("sudo apt-get install git wget build-essential");
-        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/debian.cpp -O /usr/aiopmi/pm.cpp");
+    else if (input == "debian" || input == "Debian") {
+        std::cout << "Setting configuration for Debian" << std::endl;
+        system("sudo touch /usr/aiopm/a2.cw");
     }
-    else if (distro == "fedora") {
-        system("sudo dnf install git wget gcc-c++");
-        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/fedora.cpp -O /usr/aiopmi/pm.cpp");
+    else if (input == "fedora" || input == "Fedora") {
+        std::cout << "Setting configuration for Fedora" << std::endl;
+        system("sudo touch /usr/aiopm/a3.cw");
     }
-    else if (distro == "suse") {
-        system("sudo zypper install git wget gcc-c++");
-        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/suse.cpp -O /usr/aiopmi/pm.cpp");
+    else if (input == "opensuse" || input == "Opensuse") {
+        std::cout << "Setting configuration for Opensuse" << std::endl;
+        system("sudo touch /usr/aiopm/a4.cw");
     }
-    else if (distro == "void") {
-        system("sudo xbps-install git wget gcc");
-        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/void.cpp -O /usr/aiopmi/pm.cpp");
+    else if (input == "void" || input == "Void") {
+        std::cout << "Setting configuration for Void linux" << std::endl;
+        system("sudo touch /usr/aiopm/a5.cw");
     }
-     else {
-        std::cout << "Unsupported distribution. Please choose arch, debian, void, suse or fedora." << std::endl;
-        system("exit");
+    else {
+        std::cout << "Invalid input\n";
+        dw();
     }
+    
 }
+
 
 int main() {
     system("sudo rm -rf /usr/aiopmi");
+    system("sudo rm -rf /usr/aiopm");
     clear;
     std::cout << "AIOPM Plus Installer" << std::endl;
     std::cout << "By VPeti" << std::endl;
     sleep(2);
+    system("sudo mkdir /usr/aiopm");
     system("sudo mkdir /usr/aiopmi");
     dw();
     system("read -p 'Press Enter to continue...'");
+    system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/main.cpp -O /usr/aiopmi/pm.cpp");
     //Compiles with blast processing technology :)
     system("sudo g++ /usr/aiopmi/pm.cpp -o /bin/pm");
     system("sudo chmod +x /bin/pm");
