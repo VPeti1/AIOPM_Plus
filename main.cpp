@@ -226,13 +226,6 @@ int main(int argc, char* argv[]) {
         }
     }
     else if (packageManager == "flex") {
-
-        if (action == "install") {
-            std::string package = argv[3];
-            system("sudo mkdir /usr/flexpkgr/");
-            system(("wget https://raw.githubusercontent.com/VPeti1/FlexPackages/main/" + package + " /flex.pkg -O flex.pkg").c_str());
-            system("flex");
-        }
         if (action == "init") {
             system("wget https://github.com/VPeti1/FlexPkg/raw/master/installer.out -O installer.out");
             system("sudo chmod +x installer.out");
@@ -243,6 +236,6 @@ int main(int argc, char* argv[]) {
         }
     }
     else {
-        std::cerr << "Invalid package manager. Use 'pip', 'flatpak', 'snap', or 'deb'.\n";
+        std::cerr << "Invalid package manager.\n";
     }
 }
