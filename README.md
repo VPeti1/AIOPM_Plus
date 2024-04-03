@@ -22,9 +22,3 @@ Extra argument: init (Installs and initializes FlexPkg)
 Arch only
 ## AUR: arch linux user repo
 Arch only
-
-# Known issues
-## Error: std::logic_error --- You havent entered all the arguments
-terminate called after throwing an instance of 'std::logic_error'
-  what():  basic_string: construction from null is not valid
-Aborted (core dumped)
