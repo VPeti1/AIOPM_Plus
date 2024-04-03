@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <stdexcept>
+using namespace std;
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -51,7 +52,7 @@ int main(int argc, char* argv[]) {
             system(("flatpak uninstall " + package).c_str());
         }
         else if (action == "update") {
-            std::cout << "Updating flatpak packages: " << package << std::endl;
+            std::cout << "Updating flatpak package: " << package << std::endl;
             system("flatpak update");
         }
         else{
@@ -71,26 +72,79 @@ int main(int argc, char* argv[]) {
             std::cerr << "Invalid argument!\n";
         }
     } else if (packageManager == "sys") {
+        std::string package = argv[3];
         if (action == "install") {
-            std::string package = argv[3];
-            std::cout << "Installing pacman package: " << package << std::endl;
-            system(("sudo pacman -S " + package).c_str());
-        } else if (action == "remove") {
-            std::string package = argv[3];
-            std::cout << "Removing pacman package: " << package << std::endl;
-            system(("sudo pacman -Rs " + package).c_str());
-        } else if (action == "update") {
-            std::cout << "Updating pacman packages" << std::endl;
+        if (package.empty()) {
+        cerr << "Error: No package names specified. Please provide at least one package name.\n";
+        return 1;
+        }
+        system(("sudo pacman -S " + package).c_str());
+    } else if (action == "remove") {
+        if (package.empty()) {
+        cerr << "Error: No package names specified. Please provide at least one package name.\n";
+        return 1;
+        }
+        system(("sudo pacman -Rs " + package).c_str());
+    } else if (action == "update") {
+        if (argc >= 3) {
+            std::cout << "Too many arguments\n";
+            return 1;
+        } else {
+            system("sudo pacman -Syy");
+        }
+    } else if (action == "upgrade") {
+        if (argc >= 3) {
+            std::cout << "Too many arguments\n";
+            return 1;
+        } else {
+            system("sudo pacman -Su");
+        }
+    } else if (action == "upd") {
+        if (argc >= 3) {
+            std::cout << "Too many arguments\n";
+            return 1;
+        } else {
             system("sudo pacman -Syu");
         }
-        else if (action == "mremove") {
-            std::string package = argv[3];
-            std::cout << "Removing pacman packages" << std::endl;
-            system((" sudo pacman -R $(pacman -Qq | grep " + package + ")").c_str());
+    }
+    else if (action == "show") {
+        if (package.empty()) {
+        cerr << "Error: No package names specified. Please provide at least one package name.\n";
+        return 1;
         }
-        else{
-            std::cerr << "Invalid argument!\n";
+        system(("sudo pacman -Q " + package).c_str());
+    } else if (action == "localinstall") {
+        if (package.empty()) {
+        cerr << "Error: No package path specified. Please provide a package path.\n";
+        return 1;
         }
+        if (argc > 3) {
+        std::cout << "Too many arguments!" << std::endl;
+        }
+        system(("sudo pacman -U " + package).c_str());
+    } else if (action == "list") {
+        if (package.empty()) {
+        cerr << "Error: No package names specified. Please provide at least one package name.\n";
+        return 1;
+        }
+        system("sudo pacman -Q");
+    } else if (action == "search") {
+        if (package.empty()) {
+        cerr << "Error: No package names specified. Please provide at least one package name.\n";
+        return 1;
+        }
+        system(("sudo pacman -Si " + package).c_str());
+    } else if (action == "mremove") {
+        if (package.empty()) {
+        cerr << "Error: No package names specified. Please provide at least one package name.\n";
+        return 1;
+        }
+        system(("sudo pacman -R $(pacman -Qq | grep " + package + ")").c_str());
+    }
+     else {
+        cerr << "Invalid argument!\n";
+        return 1;
+    }
     }
     else if (packageManager == "aur") {
         std::string package = argv[3];
