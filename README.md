@@ -16,8 +16,6 @@ sudo chmod +x installer.out
 There is no update funtions when using snap
 ## Flatpak: flatpak package manager 
 ## Pip: python package manager
-## Flex: installs flex.pkg files from the repo "FlexPackages"
-Extra argument: init (Installs and initializes FlexPkg)
 ## MRemove: used to remove multiple packages in archlinux 
 Arch only
 ## AUR: arch linux user repo
