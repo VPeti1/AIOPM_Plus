@@ -71,31 +71,37 @@ int main(int argc, char* argv[]) {
             std::cerr << "Invalid argument!\n";
         }
     } else if (packageManager == "sys") {
-        // Example Fedora commands
         if (action == "install") {
             std::string package = argv[3];
-            std::cout << "Installing YUM package: " << package << std::endl;
-            system(("sudo yum install " + package).c_str());
+            std::cout << "Installing pacman package: " << package << std::endl;
+            system(("sudo pacman -S " + package).c_str());
         } else if (action == "remove") {
             std::string package = argv[3];
-            std::cout << "Removing YUM package: " << package << std::endl;
-            system(("sudo yum remove " + package).c_str());
+            std::cout << "Removing pacman package: " << package << std::endl;
+            system(("sudo pacman -Rs " + package).c_str());
         } else if (action == "update") {
-            std::cout << "Updating YUM packages" << std::endl;
-            system("sudo yum update");
+            std::cout << "Updating pacman packages" << std::endl;
+            system("sudo pacman -Syu");
+        }
+        else if (action == "mremove") {
+            std::string package = argv[3];
+            std::cout << "Removing pacman packages" << std::endl;
+            system((" sudo pacman -R $(pacman -Qq | grep " + package + ")").c_str());
         }
         else{
             std::cerr << "Invalid argument!\n";
         }
-}
-    else if (packageManager == "flex") {
-
+    }
+    else if (packageManager == "aur") {
+        std::string package = argv[3];
         if (action == "install") {
-            std::string package = argv[3];
-            system("sudo mkdir /usr/flexpkgr/");
-            system(("wget https://raw.githubusercontent.com/VPeti1/FlexPackages/main/" + package + " /flex.pkg -O flex.pkg").c_str());
-            system("flex");
+            system(("eaur " + package).c_str());
         }
+        else{
+            std::cerr << "Invalid argument!\n";
+        }
+    }
+    else if (packageManager == "flex") {
         if (action == "init") {
             system("wget https://github.com/VPeti1/FlexPkg/raw/master/installer.out -O installer.out");
             system("sudo chmod +x installer.out");
@@ -106,6 +112,6 @@ int main(int argc, char* argv[]) {
         }
     }
     else {
-        std::cerr << "Invalid package manager. Use 'pip', 'flatpak', 'snap', or 'deb'.\n";
+        std::cerr << "Invalid package manager.\n";
     }
 }
