@@ -146,25 +146,6 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     }
-    else if (packageManager == "aur") {
-        std::string package = argv[3];
-        if (action == "install") {
-            system(("eaur " + package).c_str());
-        }
-        else{
-            std::cerr << "Invalid argument!\n";
-        }
-    }
-    else if (packageManager == "flex") {
-        if (action == "init") {
-            system("wget https://github.com/VPeti1/FlexPkg/raw/master/installer.out -O installer.out");
-            system("sudo chmod +x installer.out");
-            system("./installer.out");
-        }
-        else{
-            std::cerr << "Invalid argument!\n";
-        }
-    }
     else {
         std::cerr << "Invalid package manager.\n";
     }
