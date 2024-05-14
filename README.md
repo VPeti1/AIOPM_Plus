@@ -10,13 +10,12 @@ sudo chmod +x installer.out
 ./installer.out
 
 # Syntax
-## pm <sys,snap,flatpak,pip,flex> <install,remove,update> <package name>
-## Sys: default package manager of the system 
-## Snap: snap package manager 
-There is no update funtions when using snap
-## Flatpak: flatpak package manager 
-## Pip: python package manager
-## MRemove: used to remove multiple packages in archlinux 
-Arch only
-## AUR: arch linux user repo
-Arch only
+## pm (package manager) (action) (package name)
+    Sys: default package manager of the system 
+        MRemove: used to remove multiple packages in archlinux 
+    Snap: snap package manager 
+        There is no update funtions when using snap
+    Flatpak: flatpak package manager 
+    Pip: python package manager
+    AUR: arch linux user repo (Using Yay)
+

@@ -4,8 +4,16 @@
 #include <stdexcept>
 #include <unistd.h>
 #include <fstream>
+#include <sys/stat.h>
 #define clear std::cout << "\033[2J\033[1;1H";
 using namespace std;
+
+string checkpm(string& name) {
+    string path = "/usr/bin/" + name;
+    struct stat buffer; 
+    int result = (stat(path.c_str(), &buffer) == 0 ? 0 : 1);
+    return std::to_string(result);
+}
 
 int main(int argc, char* argv[]) {
     //Splash screen
@@ -21,18 +29,26 @@ int main(int argc, char* argv[]) {
     sleep(1);
     if (argc < 2) {
         std::cerr << "Too few arguments! Usage: pm <package_manager> <action> <package_name>\n";
-        
+        return 1;
     }
-
-    std::string packageManager = argv[1];
 
     if (argc < 3) {
         std::cerr << "Insufficient arguments! Usage: pm <package_manager> <action> <package_name>\n";
-        
+        return 1;
     }
 
+    std::string packageManager = argv[1];
     std::string action = argv[2];
-    
+
+    if (packageManager != "sys") {
+        if (packageManager != "aur") {
+            string check = checkpm(packageManager);
+            if (check == "1") {
+                std::cout << "You dont have that package mananger installed";
+                return 1;
+            }
+        }
+    }    
 
     // Handle different package managers
     if (packageManager == "pip") {
@@ -85,7 +101,7 @@ int main(int argc, char* argv[]) {
             std::cerr << "Invalid argument!\n";
         }
     } else if (packageManager == "sys") {
-    std::ifstream file("/usr/aiopm/a1.cw");
+    std::ifstream file("/etc/aiopm/a1.cw");
     //arch file
     if (file.is_open()) {
         file.close();
@@ -165,7 +181,7 @@ int main(int argc, char* argv[]) {
 
     } else {
     //debian file
-    std::ifstream file("/usr/aiopm/a2.cw");
+    std::ifstream file("/etc/aiopm/a2.cw");
     if (file.is_open()) {
         file.close();
                 if (action == "install") {
@@ -188,7 +204,7 @@ int main(int argc, char* argv[]) {
     }
     else {
         //fedora file
-        std::ifstream file("/usr/aiopm/a3.cw");
+        std::ifstream file("/etc/aiopm/a3.cw");
     if (file.is_open()) {
         file.close();
                 if (action == "install") {
@@ -211,7 +227,7 @@ int main(int argc, char* argv[]) {
     }
     else {
     //opensuse file
-    std::ifstream file("/usr/aiopm/a4.cw");
+    std::ifstream file("/etc/aiopm/a4.cw");
     if (file.is_open()) {
         file.close();
                 if (action == "install") {
@@ -233,7 +249,7 @@ int main(int argc, char* argv[]) {
     }
     else {
     //void file
-    std::ifstream file("/usr/aiopm/a5.cw");
+    std::ifstream file("/etc/aiopm/a5.cw");
     if (file.is_open()) {
         file.close();
                 if (action == "install") {
@@ -261,7 +277,25 @@ int main(int argc, char* argv[]) {
     }
     }
     }
+     else if (packageManager == "aur") {
+        std::ifstream file("/usr/bin/yay");
+        if (file.is_open()) {
+            if (action == "install") {
+                std::string package = argv[3];
+            if (package.empty()) {
+                cerr << "Error: No package names specified. Please provide at least one package name.\n";
+                return 1;
+            }
+        system(("yay -S " + package).c_str());
+    }
+    }
+    else {
+        cerr << "Error: Your dont have yay installed!!.\n";
+        return 1;
+        }
+     }
     else {
         std::cerr << "Invalid package manager.\n";
+        return 1;
     }
 }

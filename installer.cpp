@@ -22,27 +22,27 @@ void dw() {
     if (input == "arch" || input == "Arch") {
         system("sudo pacman -S git wget gcc");
         std::cout << "Setting configuration for Arch" << std::endl;
-        system("sudo touch /usr/aiopm/a1.cw");
+        system("sudo touch /etc/aiopm/a1.cw");
     }
     else if (input == "debian" || input == "Debian") {
         system("sudo apt-get install git wget build-essential");
         std::cout << "Setting configuration for Debian" << std::endl;
-        system("sudo touch /usr/aiopm/a2.cw");
+        system("sudo touch /etc/aiopm/a2.cw");
     }
     else if (input == "fedora" || input == "Fedora") {
         system("sudo dnf install git wget gcc-c++");
         std::cout << "Setting configuration for Fedora" << std::endl;
-        system("sudo touch /usr/aiopm/a3.cw");
+        system("sudo touch /etc/aiopm/a3.cw");
     }
     else if (input == "opensuse" || input == "Opensuse") {
         system("sudo zypper install git wget gcc-c++");
         std::cout << "Setting configuration for Opensuse" << std::endl;
-        system("sudo touch /usr/aiopm/a4.cw");
+        system("sudo touch /etc/aiopm/a4.cw");
     }
     else if (input == "void" || input == "Void") {
         system("sudo xbps-install git wget gcc");
         std::cout << "Setting configuration for Void linux" << std::endl;
-        system("sudo touch /usr/aiopm/a5.cw");
+        system("sudo touch /etc/aiopm/a5.cw");
     }
     else {
         std::cout << "Invalid input\n";
@@ -54,12 +54,11 @@ void dw() {
 
 int main() {
     system("sudo rm -rf /usr/aiopmi");
-    system("sudo rm -rf /usr/aiopm");
     clear;
     std::cout << "AIOPM Plus Installer" << std::endl;
     std::cout << "By VPeti" << std::endl;
     sleep(2);
-    system("sudo mkdir /usr/aiopm");
+    system("sudo mkdir /etc/aiopm");
     system("sudo mkdir /usr/aiopmi");
     dw();
     system("read -p 'Press Enter to continue...'");
@@ -68,5 +67,6 @@ int main() {
     system("sudo g++ /usr/aiopmi/pm.cpp -o /bin/pm");
     system("sudo chmod +x /bin/pm");
     std::cout << "AIOPM Plus Installer Completed!" << std::endl;
-    system("exit");
+    sleep(2);
+    system("sudo rm -rf /usr/aiopmi");
 }
