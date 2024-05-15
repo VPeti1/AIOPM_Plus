@@ -9,7 +9,7 @@
 using namespace std;
 
 string checkpm(string& name) {
-    string path = "/etc/bin/" + name;
+    string path = "/usr/bin/" + name;
     struct stat buffer; 
     int result = (stat(path.c_str(), &buffer) == 0 ? 0 : 1);
     return std::to_string(result);
