@@ -9,10 +9,53 @@
 using namespace std;
 
 string checkpm(string& name) {
-    string path = "/usr/bin/" + name;
+    string path = "/etc/bin/" + name;
     struct stat buffer; 
     int result = (stat(path.c_str(), &buffer) == 0 ? 0 : 1);
     return std::to_string(result);
+}
+
+void fst() {
+    clear
+    //fst means first time setup
+    std::cout << "Welcome to AIOPM Plus Setup! " << std::endl;
+    std::string input;
+    std::cout << "What distro are you using?" << std::endl;
+    std::cout << "(arch,debian,fedora,opensuse or void)" << std::endl;
+    std::cout << "(Derivatives included)" << std::endl;
+    //derivatives like ubuntu,mint...
+    std::cin >> input;
+    if (input == "arch" || input == "Arch") {
+        std::cout << "Setting configuration for Arch" << std::endl;
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a1.cw");
+        //creates files for arch
+    }
+    else if (input == "debian" || input == "Debian") {
+        std::cout << "Setting configuration for Debian" << std::endl;
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a2.cw");
+    }
+    else if (input == "fedora" || input == "Fedora") {
+        std::cout << "Setting configuration for Fedora" << std::endl;
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a3.cw");
+        //creates files for fedora
+    }
+    else if (input == "opensuse" || input == "Opensuse") {
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a4.cw");
+    }
+    else if (input == "void" || input == "Void") {
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a5.cw");
+    }
+    else{
+        std::cout << "Invalid input! Retrying" << std::endl;
+        system("read -p 'Press Enter to continue...'");
+        fst();
+    }
+    
 }
 
 int main(int argc, char* argv[]) {
@@ -270,7 +313,7 @@ int main(int argc, char* argv[]) {
 
     }
     else {
-        std::cout << "No sys file found!";
+        fst();
     }
     }
     }
@@ -278,7 +321,7 @@ int main(int argc, char* argv[]) {
     }
     }
      else if (packageManager == "aur") {
-        std::ifstream file("/usr/bin/yay");
+        std::ifstream file("/etc/bin/yay");
         if (file.is_open()) {
             if (action == "install") {
                 std::string package = argv[3];
