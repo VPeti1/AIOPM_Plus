@@ -321,7 +321,7 @@ int main(int argc, char* argv[]) {
     }
     }
      else if (packageManager == "aur") {
-        std::ifstream file("/etc/bin/yay");
+        std::ifstream file("/usr/bin/yay");
         if (file.is_open()) {
             if (action == "install") {
                 std::string package = argv[3];
